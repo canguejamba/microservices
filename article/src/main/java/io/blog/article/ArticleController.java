@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/article")
+@RequestMapping("api/v1/articles")
 @AllArgsConstructor
 public class ArticleController {
 
@@ -25,4 +25,6 @@ public class ArticleController {
         log.info("new Article registration {}", articleRegisterRequest);
         articleService.registerArticle(articleRegisterRequest);
     }
+
+
 }
