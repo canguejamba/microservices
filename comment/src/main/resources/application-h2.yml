@@ -1,0 +1,21 @@
+server:
+    port: 8081
+spring:
+  application:
+    name: comment
+  datasource:
+    url: jdbc:h2:mem:comment
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+    h2:
+      console.enabled: true
+      console.settings.trace: false
+      console.path: /h2-console
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show_sql: true

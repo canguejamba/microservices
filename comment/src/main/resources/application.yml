@@ -1,21 +1,27 @@
 server:
-    port: 8081
+  port: 8081
+
 spring:
   application:
     name: comment
   datasource:
-    url: jdbc:h2:mem:comment
-    username: sa
-    password: sa
-    driverClassName: org.h2.Driver
-    h2:
-      console.enabled: true
-      console.settings.trace: false
-      console.path: /h2-console
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/comment?createDatabaseIfNotExist=true
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+    username: admin
+    password: admin
+
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: 'create-drop'
     properties:
+      hibernate.id.new_generator_mappings: false
+      hibernate.connection.provider_disables_autocommit: true
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         show_sql: true
+        ddl:
+          auto: update

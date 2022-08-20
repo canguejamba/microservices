@@ -6,15 +6,21 @@
 package io.blog.comment;
 
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
-    public CommentResponse registerComment(CommentRegisterRequest commentRegisterRequest) {
+
+    private final ModelMapper mapper;
+
+    public CommentDto registerComment(CommentRegisterRequest commentRegisterRequest) {
         Comment comment = Comment.builder()
                 .articleId(commentRegisterRequest.articleId())
                 .body(commentRegisterRequest.body())
@@ -23,14 +29,29 @@ public class CommentService {
                 .build();
         commentRepository.saveAndFlush(comment);
 
-        return CommentResponse.builder()
+        return CommentDto.builder()
                 .commentId(comment.getId())
                 .articleId(comment.getArticleId())
                 .body(comment.getBody())
+                .createdAt(comment.getCreatedAt())
+                .updatedAt(comment.getUpdatedAt())
                 .build();
+
     }
 
-    public Comment getComment(Long articleId) {
-        return commentRepository.findByArticleId(articleId);
+
+
+    public List<CommentDto> getComment(Long articleId) {
+
+        List<Comment> comments = commentRepository.findByArticleId(articleId);
+
+        return comments.stream().map(comment -> mapToDTO(comment)).collect(Collectors.toList());
+    }
+
+    private CommentDto mapToDTO(Comment comment) {
+        //convert entity to DTO
+        CommentDto newCommentDto = mapper.map(comment, CommentDto.class);
+
+        return newCommentDto;
     }
 }

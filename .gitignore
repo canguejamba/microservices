@@ -333,7 +333,7 @@ dist
 HELP.md
 
 
-!**/src/test/**
+
 node_modules
 #cypress
 src/test/e2e/cypress/reports
