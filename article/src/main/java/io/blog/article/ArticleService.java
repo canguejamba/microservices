@@ -45,7 +45,7 @@ public void registerArticle(ArticleRegisterRequest articleRegisterRequest){
 
     private List<CommentDto> fillAdditionalData(final Article article) {
         List<CommentDto>commentDtoList = restTemplate.getForObject(
-                "http://localhost:8081/api/v1/comments/{articleId}",
+                "http://COMMENT:8081/api/v1/comments/{articleId}",
                 List.class,
                 article.getId());
 
