@@ -3,7 +3,7 @@
 
 
 
-This codebase was created to demonstrate a fully fledged full-stack application built with Spring boot using event-driven including CRUD operations, authentication, pagination, and more.
+This codebase was created to demonstrate a fully fledged full-stack Microservices built with Spring boot using Event-Driven including CRUD operations, authentication, pagination, and more.
 
 
 
