@@ -13,6 +13,7 @@
         <module>comment</module>
         <module>eureka-server</module>
         <module>feign</module>
+        <module>notification</module>
     </modules>
 
 

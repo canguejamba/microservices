@@ -5,6 +5,8 @@
  */
 package io.blog.comment;
 
+import io.clients.feign.notification.NotificationClient;
+import io.clients.feign.notification.NotificationRegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final NotificationClient notificationClient;
 
     private final ModelMapper mapper;
 
@@ -29,6 +32,15 @@ public class CommentService {
                 .build();
         commentRepository.saveAndFlush(comment);
 
+        // todo:send notification to admin
+        NotificationRegistrationRequest notificationRegistrationRequest = NotificationRegistrationRequest.builder()
+                .message("new comment")
+                .sender("admin")
+                .commentId(comment.getId())
+                .articleId(comment.getArticleId())
+                .build();
+notificationClient.registerNotification(notificationRegistrationRequest);
+
         return CommentDto.builder()
                 .commentId(comment.getId())
                 .articleId(comment.getArticleId())
@@ -36,6 +48,7 @@ public class CommentService {
                 .createdAt(comment.getCreatedAt())
                 .updatedAt(comment.getUpdatedAt())
                 .build();
+
 
     }
 
