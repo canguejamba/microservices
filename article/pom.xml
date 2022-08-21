@@ -48,6 +48,12 @@
         <!-- spring cloud dependencies: -->
 
         <!-- Custom dependencies: -->
+        <dependency>
+            <groupId>io.microservices</groupId>
+            <artifactId>feign</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

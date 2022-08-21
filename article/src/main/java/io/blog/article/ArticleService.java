@@ -5,6 +5,8 @@
  */
 package io.blog.article;
 
+import io.clients.feign.comment.CommentClient;
+import io.clients.feign.shared.CommentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +21,7 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     private final RestTemplate restTemplate;
+    private final CommentClient commentClient;
 
 public void registerArticle(ArticleRegisterRequest articleRegisterRequest){
 
@@ -44,10 +47,8 @@ public void registerArticle(ArticleRegisterRequest articleRegisterRequest){
     }
 
     private List<CommentDto> fillAdditionalData(final Article article) {
-        List<CommentDto>commentDtoList = restTemplate.getForObject(
-                "http://COMMENT:8081/api/v1/comments/{articleId}",
-                List.class,
-                article.getId());
+
+        List<CommentDto>commentDtoList = commentClient.getComment(article.getId());
 
         return commentDtoList;
     }

@@ -5,6 +5,7 @@
  */
 package io.blog.article;
 
+import io.clients.feign.shared.CommentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package io.blog.article;
+package io.clients.feign.shared;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

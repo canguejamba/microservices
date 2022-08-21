@@ -1,12 +1,6 @@
 # Microservices
 
-
-
-
 This codebase was created to demonstrate a fully fledged full-stack Microservice built with Spring boot using Event-Driven including CRUD operations, authentication, pagination, and more.
-
-
-
 
 ### Getting started 
 
@@ -19,9 +13,6 @@ Architecture for this project is based on the [Spring Boot](https://spring.io/mi
 **Enjoy!**
 
 ## How it works
-
-
-
 
 ## Tech stack
 The Microservices was built with:
