@@ -25,6 +25,10 @@ spring:
         show_sql: true
         ddl:
           auto: update
+
+  zipkin:
+    base-url: http://localhost:9411
+
   eureka:
     fetch-registry: true
     register-with-eureka: true

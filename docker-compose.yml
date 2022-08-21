@@ -4,12 +4,14 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: article
+      POSTGRES_DB: microservices
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       PGDATA: /var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - postgres
     volumes:
       - db-data:/var/lib/postgresql/data
 
@@ -23,8 +25,34 @@ services:
       PGADMIN_LISTEN_PORT: 80
     ports:
       - "5050:80"
+    networks:
+      - postgres
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
+
+  rabbitmq:
+    image: rabbitmq:3.9.11-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring
+
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
 volumes:
   db-data:
   pgadmin-data:
