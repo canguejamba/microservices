@@ -14,6 +14,7 @@
         <module>eureka-server</module>
         <module>feign</module>
         <module>notification</module>
+        <module>gatewayAPI</module>
     </modules>
 
 
