@@ -7,6 +7,7 @@ package io.blog.comment;
 
 import io.clients.feign.notification.NotificationClient;
 import io.clients.feign.notification.NotificationRegistrationRequest;
+import io.message.server.RabbitMQMessageProducer;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final NotificationClient notificationClient;
+
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     private final ModelMapper mapper;
 
@@ -39,7 +42,13 @@ public class CommentService {
                 .commentId(comment.getId())
                 .articleId(comment.getArticleId())
                 .build();
-notificationClient.registerNotification(notificationRegistrationRequest);
+ //notificationClient.registerNotification(notificationRegistrationRequest);
+
+        rabbitMQMessageProducer.publish(
+                notificationRegistrationRequest,
+                "internal.exchange",
+                "internal-notification.routing-key"
+        );
 
         return CommentDto.builder()
                 .commentId(comment.getId())

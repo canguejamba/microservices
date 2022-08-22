@@ -35,3 +35,5 @@ spring:
     client:
       serviceUrl:
         defaultZone: http://localhost:8761/eureka/
+  rabbitmq:
+    addresses: localhost:5672
