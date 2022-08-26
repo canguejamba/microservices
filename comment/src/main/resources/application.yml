@@ -30,10 +30,12 @@ spring:
     base-url: http://localhost:9411
 
   eureka:
-    fetch-registry: true
-    register-with-eureka: true
     client:
       serviceUrl:
         defaultZone: http://localhost:8761/eureka/
+      fetch-registry: true
+      register-with-eureka: true
+      enabled: false
+
   rabbitmq:
     addresses: localhost:5672
