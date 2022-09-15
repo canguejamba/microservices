@@ -48,30 +48,31 @@ services:
     networks:
       - spring
 
-  eureka-server:
-    image: cganda/eureka-server:latest
-    container_name: eureka-server
-    ports:
-      - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-    depends_on:
-      - zipkin
 
-  api-gateway:
-    image: cganda/api-gateway:latest
-    container_name: api-gateway
-    ports:
-      - "8083:8083"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - spring
-    depends_on:
-      - zipkin
-      - eureka-server
+#  eureka-server:
+#    image: cganda/eureka-server:latest
+#    container_name: eureka-server
+#    ports:
+#      - "8761:8761"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#    depends_on:
+#      - zipkin
+
+#  api-gateway:
+#    image: cganda/api-gateway:latest
+#    container_name: api-gateway
+#    ports:
+#      - "8083:8083"
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    networks:
+#      - spring
+#    depends_on:
+#      - zipkin
+#      - eureka-server
 
   article:
     image: cganda/article:latest
@@ -86,7 +87,6 @@ services:
     depends_on:
       - zipkin
       - postgres
-      - eureka-server
 
   comment:
     image: cganda/comment:latest
@@ -101,7 +101,6 @@ services:
     depends_on:
       - zipkin
       - postgres
-      - eureka-server
       - rabbitmq
 
   notification:
@@ -117,7 +116,6 @@ services:
     depends_on:
       - zipkin
       - postgres
-      - eureka-server
       - rabbitmq
 
 networks:

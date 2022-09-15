@@ -5,7 +5,7 @@
  */
 package io.blog.notification;
 
-import io.clients.feign.notification.NotificationRegistrationRequest;
+import io.clients.feign.shared.NotificationRegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

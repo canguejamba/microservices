@@ -5,7 +5,7 @@
  */
 package io.blog.notification;
 
-import io.clients.feign.notification.NotificationRegistrationRequest;
+import io.clients.feign.shared.NotificationRegistrationRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -18,7 +18,7 @@ public class NotificationConsumer {
 
     private final NotificationService notificationService;
 
-    @RabbitListener(queues = "${spring.rabbitmq.queues.notification}")
+    @RabbitListener(queues = "${rabbitmq.queues.notification}")
     public void consumer(NotificationRegistrationRequest message) {
         log.info("Received or consumed message: {}", message);
         notificationService.registerNotification(message);

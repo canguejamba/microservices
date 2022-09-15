@@ -26,4 +26,4 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: rabbitmq-peer-discovery-rbac 
+  name: rabbitmq-peer-discovery-rbac

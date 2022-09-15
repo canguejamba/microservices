@@ -1,46 +1,35 @@
 server:
   port: 8082
-
 spring:
   application:
     name: notification
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/notification?createDatabaseIfNotExist=true
-    hikari:
-      poolName: Hikari
-      auto-commit: false
-    username: admin
     password: admin
-
+    url: jdbc:postgresql://localhost:5432/notification?createDatabaseIfNotExist=true
+    username: admin
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate.ddl-auto: 'create-drop'
+    hibernate:
+      ddl-auto: create-drop
     properties:
-      hibernate.id.new_generator_mappings: false
-      hibernate.connection.provider_disables_autocommit: true
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        show_sql: true
-        ddl:
-          auto: update
-
+    show-sql: true
   zipkin:
     base-url: http://localhost:9411
-
-  eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:8761/eureka/
-      fetch-registry: true
-      register-with-eureka: true
-      enable: false
   rabbitmq:
     addresses: localhost:5672
-    exchanges:
-      internal: internal.exchange
-    queues:
-      notification: notification.queue
-    routing-keys:
-      internal-notification: internal-notification.routing-key
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queues:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal-notification.routing-key

@@ -5,8 +5,8 @@
  */
 package io.blog.comment;
 
-import io.clients.feign.notification.NotificationClient;
-import io.clients.feign.notification.NotificationRegistrationRequest;
+import io.clients.feign.shared.NotificationRegistrationRequest;
+import io.clients.feign.shared.CommentRegisterRequest;
 import io.message.server.RabbitMQMessageProducer;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,10 +20,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final NotificationClient notificationClient;
-
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
-
     private final ModelMapper mapper;
 
     public CommentDto registerComment(CommentRegisterRequest commentRegisterRequest) {
@@ -42,7 +39,6 @@ public class CommentService {
                 .commentId(comment.getId())
                 .articleId(comment.getArticleId())
                 .build();
- //notificationClient.registerNotification(notificationRegistrationRequest);
 
         rabbitMQMessageProducer.publish(
                 notificationRegistrationRequest,

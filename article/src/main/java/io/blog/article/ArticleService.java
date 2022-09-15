@@ -9,7 +9,6 @@ import io.clients.feign.comment.CommentClient;
 import io.clients.feign.shared.CommentDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.util.List;
@@ -20,7 +19,6 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    private final RestTemplate restTemplate;
     private final CommentClient commentClient;
 
 public void registerArticle(ArticleRegisterRequest articleRegisterRequest){

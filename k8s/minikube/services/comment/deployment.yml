@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comment
+  labels:
+    app: comment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: comment
+      labels:
+        app: comment
+    spec:
+      containers:
+        - name: comment
+          image: cganda/comment:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+            - name: feign.comment.url
+              value: http://comment
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: comment

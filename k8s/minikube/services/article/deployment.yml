@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article
+  labels:
+    app: article
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: article
+      labels:
+        app: article
+    spec:
+      containers:
+        - name: article
+          image: cganda/article:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: kube
+            - name: feign.article.url
+              value: http://article
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: article

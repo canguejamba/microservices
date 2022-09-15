@@ -1,4 +1,4 @@
-package io.clients.feign.notification;
+package io.clients.feign.shared;
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;

@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: article
+  datasource:
+    password: admin
+    url: jdbc:postgresql://postgres:5432/article?createDatabaseIfNotExist=true
+    username: admin
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  zipkin:
+    base-url: http://zipkin:9411
+
